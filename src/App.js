@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, createContext } from "react";
+//styles
+import "./App.css";
+//routes
+import Routes from "./components/Routes";
+
+export const UserContext = createContext();
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+   const [countries, setCountries] = useState(null);
+   const [token, setToken] = useState("");
+   const [userAccount, setUserAccount] = useState("");
+   const [lastWalletAddress, setlastWalletAddress] = useState("");
+   const [lastWalletAddressSell, setlastWalletAddressSell] = useState("");
+
+   return (
+      <div className="App">
+         <UserContext.Provider
+            value={{
+               countries,
+               setCountries,
+               token,
+               setToken,
+               userAccount,
+               setUserAccount,
+               lastWalletAddress,
+               setlastWalletAddress,
+               lastWalletAddressSell,
+               setlastWalletAddressSell,
+            }}
+         >
+            <Routes />
+         </UserContext.Provider>
+      </div>
+   );
 }
 
 export default App;
