@@ -39,8 +39,13 @@ const BuyFour = () => {
             </h2>
 
             <div className="my-5 text-start">
-               <h3>IBAN: ABCDEFG1234567</h3>
-               <h3>Swap ID: {htmlId}</h3>
+               <h3>
+                  <span style={{ color: "yellow" }}>IBAN:</span> ABCDEFG1234567
+               </h3>
+               <h3>
+                  <span style={{ color: "yellow" }}>Swap ID: </span>
+                  {htmlId}
+               </h3>
             </div>
 
             <h4 className="text-start">
@@ -48,7 +53,9 @@ const BuyFour = () => {
                following address.
             </h4>
 
-            <h4 className="my-5">{lastWalletAddress}</h4>
+            <h3 className="my-5" style={{ color: "orange" }}>
+               {lastWalletAddress}
+            </h3>
 
             <Link to="#">
                <h4>Doubts? Discord or Telegram</h4>
