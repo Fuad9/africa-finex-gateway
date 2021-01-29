@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 // styles
+import { useSpring, animated } from "react-spring";
 import { Dropdown, SplitButton, Button } from "react-bootstrap";
 // context
 import { UserContext } from "../App";
@@ -12,12 +13,27 @@ const SellOne = () => {
       setToken(e);
    };
 
+   /* Animation ======================= */
+   const props1 = useSpring({
+      from: { opacity: 0, marginTop: -500 },
+      to: { opacity: 1, marginTop: 0 },
+      config: { delay: 2500, duration: 3500 },
+   });
+
+   const props2 = useSpring({
+      from: { opacity: 0, marginLeft: -500 },
+      to: { opacity: 1, marginLeft: 0 },
+      config: { delay: 2500, duration: 3500 },
+   });
+
    return (
       <div className="container my-5 p-5">
          <div>
-            <h2 className="mb-5" style={{ color: "blueviolet" }}>
-               Stablecoin gateway - Sell
-            </h2>
+            <animated.div style={props1}>
+               <h2 className="mb-5" style={{ color: "blueviolet" }}>
+                  Stablecoin gateway - Sell
+               </h2>
+            </animated.div>
 
             <SplitButton
                key={"down"}
@@ -49,9 +65,9 @@ const SellOne = () => {
                </label>
             </div>
 
-            <div className="mt-5">
+            <animated.div className="mt-5" style={props2}>
                <h4>You will get X AOA @Preco AOA/TAOA</h4>
-            </div>
+            </animated.div>
 
             <Link to="/selltwo">
                <Button variant="primary w-50" className="px-5 mt-5 text-center">

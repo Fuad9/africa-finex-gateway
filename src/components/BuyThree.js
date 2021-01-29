@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 //styles
 import { Dropdown, SplitButton, Button } from "react-bootstrap";
+import { useSpring, animated } from "react-spring";
 
 const BuyThree = () => {
    const [selectedBank, setSelectedBank] = useState("Chose a local Bank");
@@ -10,8 +11,27 @@ const BuyThree = () => {
       setSelectedBank(e);
    };
 
+   /* Animation ======================= */
+   const props1 = useSpring({
+      from: { opacity: 0, marginRight: -500 },
+      to: { opacity: 1, margin: "0 auto" },
+      config: { delay: 2500, duration: 3500 },
+   });
+
+   const props2 = useSpring({
+      from: { opacity: 0, marginLeft: -500 },
+      to: { opacity: 1, marginLeft: 0 },
+      config: { delay: 2500, duration: 3500 },
+   });
+
+   const props3 = useSpring({
+      from: { opacity: 0, marginBottom: -500 },
+      to: { opacity: 1, marginBottom: 0 },
+      config: { delay: 2500, duration: 3500 },
+   });
+
    return (
-      <div className="container my-5">
+      <animated.div className="container my-5" style={props1}>
          <div className="p-5">
             <div className="my-5">
                <SplitButton
@@ -39,14 +59,18 @@ const BuyThree = () => {
                </SplitButton>
             </div>
 
-            <h4 className="mb-5 text-start">
-               Transfers between banks are usually faster. If available give preference to your
-               local bank and the system will automatically find the best P2P for you.
-            </h4>
+            <animated.div style={props2}>
+               <h4 className="mb-5 text-start">
+                  Transfers between banks are usually faster. If available give preference to your
+                  local bank and the system will automatically find the best P2P for you.
+               </h4>
+            </animated.div>
 
-            <Link to="#" className="ml-5">
-               <h4>How long does it usually take?</h4>
-            </Link>
+            <animated.div style={props3}>
+               <Link to="#" className="ml-5">
+                  <h4>How long does it usually take?</h4>
+               </Link>
+            </animated.div>
 
             <Link to="/buyfour">
                <Button variant="primary w-50" className="px-5 mt-5 text-center">
@@ -54,7 +78,7 @@ const BuyThree = () => {
                </Button>
             </Link>
          </div>
-      </div>
+      </animated.div>
    );
 };
 

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 //styles
+import { useSpring, animated } from "react-spring";
 import { LinearProgress } from "@material-ui/core";
 import { Dropdown, SplitButton, Button } from "react-bootstrap";
 //context
@@ -15,6 +16,19 @@ const BuyOne = () => {
    const { countries, setCountries } = useContext(UserContext);
    const { data, isLoading, error } = useQuery("all", getCountriesData);
 
+   /* Animation ======================= */
+   const props1 = useSpring({
+      from: { opacity: 0, marginTop: -500 },
+      to: { opacity: 1, marginTop: 0 },
+      config: { delay: 2500, duration: 3500 },
+   });
+
+   const props2 = useSpring({
+      from: { opacity: 0, marginLeft: -500 },
+      to: { opacity: 1, marginLeft: 0 },
+      config: { delay: 2500, duration: 3500 },
+   });
+
    if (isLoading) return <LinearProgress />;
    if (error) return <div>Something went wrong ...</div>;
 
@@ -23,9 +37,11 @@ const BuyOne = () => {
    };
 
    return (
-      <div className="container my-5" style={{ border: "2px solid blue", borderRadius: "1rem" }}>
+      <div className="container my-5">
          <div className="p-5">
-            <h2 style={{ color: "blueviolet" }}>Stable coin gateway - BUY</h2>
+            <animated.div style={props1}>
+               <h2 style={{ color: "blueviolet" }}>Stable coin gateway - BUY</h2>
+            </animated.div>
 
             <div className="my-5">
                <SplitButton
@@ -45,13 +61,18 @@ const BuyOne = () => {
 
             <div>
                <label htmlFor="quantity">
-                  <input className="form-control" type="number" placeholder="Quantity" />
+                  <input
+                     className="form-control"
+                     name="quantity"
+                     type="number"
+                     placeholder="Quantity"
+                  />
                </label>
             </div>
 
-            <div className="mt-5">
+            <animated.div className="mt-5" style={props2}>
                <h3>Total Cost @Price AOA/TAOA</h3>
-            </div>
+            </animated.div>
 
             <Link to="/buytwo">
                <Button variant="primary" className="px-5 mt-5 text-center w-50">

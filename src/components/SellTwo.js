@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import WAValidator from "wallet-address-validator";
 import { useHistory } from "react-router-dom";
 // styles
+import { useSpring, animated } from "react-spring";
 import { Button } from "react-bootstrap";
 // context
 import { UserContext } from "../App";
@@ -11,7 +12,7 @@ const SellTwo = () => {
    const [walletAddress, setWalletAddress] = useState("");
    const { lastWalletAddressSell, setlastWalletAddressSell } = useContext(UserContext);
 
-   // check validity of wallet address
+   /*check validity of wallet address ========================== */
    const validWallet = () => {
       const isValid = WAValidator.validate(walletAddress, "BTC");
       if (isValid) {
@@ -23,8 +24,15 @@ const SellTwo = () => {
       }
    };
 
+   /* Animation ======================= */
+   const props = useSpring({
+      from: { opacity: 0, marginRight: -500 },
+      to: { opacity: 1, margin: "0 auto" },
+      config: { delay: 2500, duration: 2500 },
+   });
+
    return (
-      <div className="container my-5">
+      <animated.div className="container my-5" style={props}>
          <div className="p-5">
             <input
                onBlur={(e) => setWalletAddress(e.target.value)}
@@ -49,7 +57,7 @@ const SellTwo = () => {
                Next
             </Button>
          </div>
-      </div>
+      </animated.div>
    );
 };
 

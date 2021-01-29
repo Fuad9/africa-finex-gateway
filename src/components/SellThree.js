@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 // styles
+import { useSpring, animated } from "react-spring";
 import { Button } from "react-bootstrap";
 //context
 import { UserContext } from "../App";
@@ -9,8 +10,15 @@ const SellThree = () => {
    const history = useHistory();
    const { userAccount, setUserAccount } = useContext(UserContext);
 
+   /* Animation ======================= */
+   const props = useSpring({
+      from: { opacity: 0, marginRight: -500 },
+      to: { opacity: 1, margin: "0 auto" },
+      config: { delay: 2500, duration: 2500 },
+   });
+
    return (
-      <div className="container my-5">
+      <animated.div className="container my-5" style={props}>
          <div className="p-5">
             <input
                type="text"
@@ -28,7 +36,7 @@ const SellThree = () => {
                </Button>
             </div>
          </div>
-      </div>
+      </animated.div>
    );
 };
 

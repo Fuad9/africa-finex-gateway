@@ -3,25 +3,28 @@ import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import { useId } from "react-id-generator";
 // styles
+import Typed from "react-typed";
+import "react-typed/dist/animatedCursor.css";
+import { useSpring, animated } from "react-spring";
 import { Button } from "react-bootstrap";
 // context
 import { UserContext } from "../App";
 
 const BuyFour = () => {
+   const history = useHistory();
    const [htmlId] = useId();
    const { lastWalletAddress } = useContext(UserContext);
-   const history = useHistory();
 
    /* api from environment variable =================== */
    const BASE_URL = process.env.REACT_APP_BASE_URL;
 
    /* add data to db ===================*/
    const handleAddData = async () => {
-      const bulkData = { lastWalletAddress, SwapId: htmlId, IBAN: "ABCDEFG1234567" };
+      const mockData = { lastWalletAddress, SwapId: htmlId, IBAN: "ABCDEFG1234567" };
 
       await axios
          .post(`${BASE_URL}`, {
-            bulkData,
+            mockData,
          })
          .then((res) => {
             if (res) {
@@ -31,12 +34,21 @@ const BuyFour = () => {
          });
    };
 
+   /* Animation ======================= */
+   const props = useSpring({
+      from: { opacity: 0, marginRight: -500 },
+      to: { opacity: 1, margin: "0 auto" },
+      config: { delay: 2500, duration: 3500 },
+   });
+
    return (
-      <div className="container my-5">
+      <animated.div className="container my-5" style={props}>
          <div className="p-5">
-            <h2 className="my-5 text-start" style={{ color: "blueviolet" }}>
-               Transfers funds to the following userAccount
-            </h2>
+            <Typed
+               style={{ fontSize: "2rem", color: "blueviolet", textAlign: "start" }}
+               strings={["Transfers funds to the following account"]}
+               typeSpeed={100}
+            />
 
             <div className="my-5 text-start">
                <h3>
@@ -67,7 +79,7 @@ const BuyFour = () => {
                </Button>
             </div>
          </div>
-      </div>
+      </animated.div>
    );
 };
 
