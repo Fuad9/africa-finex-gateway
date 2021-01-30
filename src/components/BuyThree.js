@@ -5,8 +5,9 @@ import { Dropdown, SplitButton, Button } from "react-bootstrap";
 import { useSpring, animated } from "react-spring";
 
 const BuyThree = () => {
-   const [selectedBank, setSelectedBank] = useState("Chose a local Bank");
+   const [selectedBank, setSelectedBank] = useState("Choose a local Bank");
 
+   /* toggle bank change ====================*/
    const handleBankChange = (e) => {
       setSelectedBank(e);
    };

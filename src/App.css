@@ -16,7 +16,19 @@ body {
    border-radius: 1rem;
 }
 
-/* custom scrollbar ================== */
+/* customize buttons =====================*/
+Button {
+   color: #000 !important;
+   background-image: linear-gradient(45deg, orange, orangered);
+}
+
+Button:hover {
+   background-image: linear-gradient(45deg, rgb(0, 132, 255), rgb(255, 0, 212));
+   transform: scale(1.2);
+   transition: 3s;
+}
+
+/* customize scrollbar ================== */
 ::-webkit-scrollbar {
    width: 15px;
 }

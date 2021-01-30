@@ -23,7 +23,7 @@ const SellThree = () => {
             <input
                type="text"
                className="form-control w-50 mx-auto"
-               placeholder="Enter Your IBAN userAccount details to be credited"
+               placeholder="Enter Your IBAN account details to be credited"
                onBlur={(e) => setUserAccount(e.target.value)}
             />
 
